@@ -1,5 +1,9 @@
 Logging plugin for requirejs.
 
+# Install
+
+Put log.js in your requirejs loading path.
+
 # Usage
 
 Create a logger for your module:
@@ -7,6 +11,11 @@ Create a logger for your module:
 define(['log!foo'], function (log) {
   log.info('Module Loaded!');
 });
+```
+
+You should see the following in your browser's console:
+```
+12:02:23 INFO         foo - Module loaded!
 ```
 
 # TODO
