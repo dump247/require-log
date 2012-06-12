@@ -47,6 +47,14 @@ define(['log'], function (log) {
       expect(log).not.hasLevel('trace');
     });
 
+    it('can add level with value 0', function () {
+      log.addLevel('trace0', 0);
+      expect(log).hasLevel('trace0');
+
+      log.removeLevel('trace0');
+      expect(log).not.hasLevel('trace0');
+    });
+
     it('can get a logger', function () {
       var logger = log.get('a');
       expect(logger).toBeDefined();

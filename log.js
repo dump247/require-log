@@ -37,7 +37,7 @@ define(['module'], function (module) {
     },
 
     addLevel: function (name, value) {
-      if (value) {
+      if (value !== undefined) {
         var logMethod = createLevelMethod(name);
         var paddedName = (name.toUpperCase() + '     ').substring(0, 5);
 
