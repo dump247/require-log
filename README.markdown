@@ -19,5 +19,5 @@ define(['log!foo'], function (log) {
 The MIT License (MIT)
 Copyright (c) 2012 Cory Thomas
 
-See [LICENSE](LICENSE)
+See [LICENSE](require-log/blob/master/LICENSE)
 
