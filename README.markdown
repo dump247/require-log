@@ -16,7 +16,7 @@ define(['log!foo'], function (log) {
 
 # License
 
-The MIT License (MIT)
+The MIT License (MIT)  
 Copyright (c) 2012 Cory Thomas
 
 See [LICENSE](require-log/blob/master/LICENSE)
