@@ -1,3 +1,5 @@
+/*global require, jasmine*/
+
 require.config({
   map: {
     '*': {

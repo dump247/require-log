@@ -1,3 +1,5 @@
+/*global define, describe, it, expect */
+
 define(['log'], function (log) {
   describe('Logger', function () {
     it('has a name', function () {

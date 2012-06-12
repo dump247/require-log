@@ -4,8 +4,7 @@
  * see: http://github.com/dump247/require-log for details
  */
 
- /*jslint */
- /*global define, window, require, Array */
+ /*global define, window */
 
 define(['module'], function (module) {
   var noop = function () {};

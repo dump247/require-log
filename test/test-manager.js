@@ -1,3 +1,5 @@
+/*global define, describe, it, expect, beforeEach */
+
 define(['log'], function (log) {
   describe('Manager', function () {
     beforeEach(function () {
