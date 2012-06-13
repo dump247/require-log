@@ -74,7 +74,7 @@ define(['module'], function (module) {
     },
 
     load: function (name, parentRequire, load, config) {
-      return this.get(name);
+      load(this.get(name));
     }
   };
 

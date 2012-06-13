@@ -66,6 +66,12 @@ define(['log'], function (log) {
       var logger2 = log.get('a');
       expect(logger2).toBe(logger);
     });
+
+    it('loader plugin', function () {
+      var logger = null;
+      log.load('a', null, function (l) { logger = l; });
+      expect(logger).toBe(log.get('a'));
+    });
   });
 });
 
