@@ -21,7 +21,7 @@ You should see the following in your browser's console:
 # TODO
 
 * Custom log message handlers (aka appenders)
-* Make minimum log level configurable
+* Configure log level and handlers for hierarchical logger structure
 
 # Configuration
 
