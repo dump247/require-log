@@ -38,6 +38,8 @@ require.config({
       // The config is mapping level name to relative priority value.
       // For example: error is currently set to 40000, so alert is a higher level
       // than error. The priority value is used for log message filtering.
+      // Although not required, you should keep your level names to 5 characters or less.
+      // Otherwise, the name may get truncted when output to the console.
       levels: { 
         alert: 100000
       }
