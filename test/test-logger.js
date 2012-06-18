@@ -9,7 +9,9 @@ define(['log'], function (log) {
 
     it('can log default levels', function () {
       for (var name in log.levels) {
-        log.get('test')[name]('Test',this.suite.description,this.description);
+        if (log.get('test')[name]) { // Virtual levels, such as all/none, do not have corresponding functions
+          log.get('test')[name]('Test',this.suite.description,this.description);
+        }
       }
     });
   });

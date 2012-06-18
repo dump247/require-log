@@ -32,6 +32,11 @@ define(['log'], function (log) {
       expect(log).hasLevel('test');
     });
 
+    it('has "virtual" all/none levels set', function () {
+      expect(log.levels.all).toEqual(Number.MIN_VALUE);
+      expect(log.levels.none).toEqual(Number.MAX_VALUE);
+    });
+
     it('can add a single level', function () {
       expect(log).not.hasLevel('alert');
 

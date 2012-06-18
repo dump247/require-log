@@ -26,7 +26,11 @@ define(['module'], function (module) {
   var log = {
     version: '0.0.1',
 
-    levels: {},
+    levels: {
+      // "virtual" levels useful for configuration
+      all: Number.MIN_VALUE,
+      none: Number.MAX_VALUE
+    },
 
     loggers: {},
 
