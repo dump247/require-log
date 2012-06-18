@@ -124,6 +124,7 @@ define(['module'], function (module) {
   // Add log levels from configuration
   if (config.levels) log.addLevel(config.levels);
 
+  // Set root log level (config or default to info)
   log.setLevel(config.level === undefined ? log.levels.info : config.level);
 
   return log;
