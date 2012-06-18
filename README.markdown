@@ -22,6 +22,7 @@ You should see the following in your browser's console:
 
 * Custom log message handlers (aka appenders)
 * Configure log level and handlers for hierarchical logger structure
+* Optimize during build. Perhaps turn 'debug' calls into a no-op.
 
 # Configuration
 
