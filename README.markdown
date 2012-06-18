@@ -29,7 +29,11 @@ You should see the following in your browser's console:
 require.config({
   config: {
     log: {
-      levels: { // Add custom log levels. You can now call log.alert(...)
+      // Add custom log levels. You can now call log.alert(...)
+      // The config is mapping level name to relative priority value.
+      // For example: error is currently set to 40000, so alert is a higher level
+      // than error. The priority value is used for log message filtering.
+      levels: { 
         alert: 100000
       }
     }
