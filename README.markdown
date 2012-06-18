@@ -23,6 +23,20 @@ You should see the following in your browser's console:
 * Custom log message handlers (aka appenders)
 * Make minimum log level configurable
 
+# Configuration
+
+```javascript
+require.config({
+  config: {
+    log: {
+      levels: { // Add custom log levels. You can now call log.alert(...)
+        alert: 100000
+      }
+    }
+  }
+});
+```
+
 # License
 
 The MIT License (MIT)  
