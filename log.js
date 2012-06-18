@@ -86,6 +86,10 @@ define(['module'], function (module) {
     error: 40000
   });
 
+  // Add log levels from configuration
+  var levels = module.config().levels;
+  if (levels) log.addLevel(levels);
+
   return log;
 });
 

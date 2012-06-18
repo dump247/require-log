@@ -5,8 +5,14 @@ define(['log'], function (log) {
     beforeEach(function () {
       this.addMatchers({
         hasLevel: function (expected) {
-          return this.actual.levels[expected] !== undefined &&
-                 this.actual.Logger.prototype[expected] !== undefined;
+          var result = this.actual.levels[expected] !== undefined &&
+                       this.actual.Logger.prototype[expected] !== undefined;
+
+          this.message = function () {
+            return "Log level not found: " + expected;
+          };
+
+          return result;
         }
       });
     });
@@ -20,6 +26,10 @@ define(['log'], function (log) {
       expect(log).hasLevel('info');
       expect(log).hasLevel('warn');
       expect(log).hasLevel('error');
+    });
+
+    it('loads custom levels from config', function () {
+      expect(log).hasLevel('test');
     });
 
     it('can add a single level', function () {

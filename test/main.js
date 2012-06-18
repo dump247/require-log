@@ -5,6 +5,14 @@ require.config({
     '*': {
       'log': '../log'
     }
+  },
+
+  config: {
+    '../log': {
+      levels: {
+        'test': 100000
+      }
+    }
   }
 });
 
