@@ -17,6 +17,64 @@ define(['log'], function (log) {
       });
     });
 
+    it('default level is info', function () {
+      var level = log.getLevel();
+      expect(level.name).toEqual('info');
+    });
+
+    it('can change root log level', function () {
+      // Set using string level name
+      log.setLevel('debug');
+      expect(log.getLevel().name).toEqual('debug');
+
+      // Set using level numeric value
+      log.setLevel(30000);
+      expect(log.getLevel().name).toEqual('warn');
+      expect(log.getLevel().value).toEqual(30000);
+
+      // Set using unknown level numeric value
+      log.setLevel(30001);
+      expect(log.getLevel().name).toBeUndefined();
+      expect(log.getLevel().value).toEqual(30001);
+
+      // Set using level object
+      log.setLevel(log.levels.error);
+      expect(log.getLevel().name).toEqual('error');
+
+      // Set using custom level object w/o name
+      log.setLevel({ value: 10000 });
+      expect(log.getLevel().name).toEqual('debug');
+
+      // Set using custom level object w/ name
+      log.setLevel({ value: 10000, name: 'custom' });
+      expect(log.getLevel().name).toEqual('debug');
+
+      // Set using custom level object w/ name and custom value
+      log.setLevel({ value: 10001, name: 'custom' });
+      expect(log.getLevel().name).toEqual('custom');
+      expect(log.getLevel().value).toEqual(10001);
+
+      log.setLevel('info');
+    });
+
+    it('throws error when setting root level to unknown value', function () {
+      // Unknown name
+      expect(function () { log.setLevel('custom'); }).toThrow();
+
+      // Invalid object
+      expect(function () { log.setLevel({}); }).toThrow();
+      expect(function () { log.setLevel(null); }).toThrow();
+      expect(function () { log.setLevel(); }).toThrow();
+    });
+
+    it('changing root log level has required effect', function () {
+      var l = log.get('test');
+      l.debug('You should not see this message!');
+      log.setLevel('debug');
+      l.debug('You should see this message');
+      log.setLevel('info');
+    });
+
     it('has a version', function () {
       expect(log.version).toMatch(/\d+\.\d+\.\d+/);
     });

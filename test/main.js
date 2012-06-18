@@ -10,6 +10,7 @@ require.config({
   config: {
     '../log': {
       levels: {
+        'trace1' : 100,
         'test': 100000
       }
     }

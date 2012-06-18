@@ -9,6 +9,7 @@
 define(['module'], function (module) {
   var noop = function () {};
   var createLevelMethod = function (name) { return noop; };
+  var config = module.config();
 
   if (window.console) {
     createLevelMethod = function (name) {
@@ -25,6 +26,7 @@ define(['module'], function (module) {
 
   var log = {
     version: '0.0.1',
+    _rootLevel: { name: 'all', value: Number.MIN_VALUE },
 
     levels: {
       // "virtual" levels useful for configuration
@@ -47,12 +49,14 @@ define(['module'], function (module) {
         this.levels[name] = { value: value };
 
         this.Logger.prototype[name] = function () {
-          var args = Array.prototype.slice.call(arguments, 0);
-          args.unshift('-');
-          args.unshift(this._paddedName);
-          args.unshift(paddedName);
-          args.unshift(new Date().toTimeString().substring(0, 8));
-          logMethod.apply(window, args);
+          if (value >= log._rootLevel.value) {
+            var args = Array.prototype.slice.call(arguments, 0);
+            args.unshift('-');
+            args.unshift(this._paddedName);
+            args.unshift(paddedName);
+            args.unshift(new Date().toTimeString().substring(0, 8));
+            logMethod.apply(window, args);
+          }
         };
       } else {
         for (var key in name) {
@@ -64,6 +68,33 @@ define(['module'], function (module) {
     removeLevel: function (name) {
       delete this.levels[name];
       delete this.Logger.prototype[name];
+    },
+
+    setLevel: function (level) {
+      if (log.levels[level]) {
+        log._rootLevel = { name: level, value: log.levels[level].value };
+      } else if (typeof level.value === 'number') {
+        log.setLevel(level.value);
+
+        if (level.name && !log._rootLevel.name) {
+          log._rootLevel.name = level.name;
+        }
+      } else if (typeof level === 'number') {
+        log._rootLevel = { value: level };
+
+        for (var levelName in log.levels) {
+          if (log.levels[levelName].value === level) {
+            log._rootLevel = { name: levelName, value: log.levels[levelName].value };
+            break;
+          }
+        }
+      } else {
+        throw 'Unknown log level: ' + level;
+      }
+    },
+
+    getLevel: function () {
+      return log._rootLevel;
     },
 
     get: function (name) {
@@ -91,8 +122,9 @@ define(['module'], function (module) {
   });
 
   // Add log levels from configuration
-  var levels = module.config().levels;
-  if (levels) log.addLevel(levels);
+  if (config.levels) log.addLevel(config.levels);
+
+  log.setLevel(config.level === undefined ? log.levels.info : config.level);
 
   return log;
 });
