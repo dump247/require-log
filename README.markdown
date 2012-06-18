@@ -45,6 +45,13 @@ require.config({
 });
 ```
 
+# Default Log Levels
+
+* *debug* (value: 10000)
+* *info* (value: 20000)
+* *warn* (value: 30000)
+* *error* (value: 40000)
+
 # License
 
 The MIT License (MIT)  
