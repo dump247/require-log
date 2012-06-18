@@ -27,6 +27,14 @@ define(['log'], function (log) {
       log.setLevel('debug');
       expect(log.getLevel().name).toEqual('debug');
 
+      // Set virtual 'all' level
+      log.setLevel('all');
+      expect(log.getLevel().name).toEqual('all');
+
+      // Set virtual 'none' level
+      log.setLevel('none');
+      expect(log.getLevel().name).toEqual('none');
+
       // Set using level numeric value
       log.setLevel(30000);
       expect(log.getLevel().name).toEqual('warn');
