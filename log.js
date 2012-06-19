@@ -46,7 +46,7 @@ define(['module'], function (module) {
         var logMethod = createLevelMethod(name);
         var paddedName = (name.toUpperCase() + '     ').substring(0, 5);
 
-        this.levels[name] = { value: value };
+        this.levels[name] = value;
 
         this.Logger.prototype[name] = function () {
           if (value >= log._rootLevel.value) {
@@ -71,20 +71,20 @@ define(['module'], function (module) {
     },
 
     setLevel: function (level) {
-      if (log.levels[level]) {
-        log._rootLevel = { name: level, value: log.levels[level].value };
+      if (this.levels[level]) {
+        this._rootLevel = { name: level, value: this.levels[level] };
       } else if (typeof level.value === 'number') {
-        log.setLevel(level.value);
+        this.setLevel(level.value);
 
-        if (level.name && !log._rootLevel.name) {
-          log._rootLevel.name = level.name;
+        if (level.name && !this._rootLevel.name) {
+          this._rootLevel.name = level.name;
         }
       } else if (typeof level === 'number') {
-        log._rootLevel = { value: level };
+        this._rootLevel = { value: level };
 
-        for (var levelName in log.levels) {
-          if (log.levels[levelName].value === level) {
-            log._rootLevel = { name: levelName, value: log.levels[levelName].value };
+        for (var levelName in this.levels) {
+          if (log.levels[levelName] === level) {
+            log._rootLevel = { name: levelName, value: log.levels[levelName] };
             break;
           }
         }
